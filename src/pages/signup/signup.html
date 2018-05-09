@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar >
+    <ion-title>New Account</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+<ion-content padding>
+
+  <div *ngIf="step === 1">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Userame</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <button (click)="step = step + 1" ion-button block >Next Step</button>
+  </div>
+
+  <div *ngIf="step === 2">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Your Email</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <br/>
+      <br/>
+      <p class="divider"><span>OR</span></p>      
+      <br/>
+      <ion-item>
+        <ion-label floating>Mobile Number</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button (click)="step = step -1" ion-button block color="danger">Go Back</button>
+    <button (click)="createAccount()" [disabled]="!isValid()" ion-button block color="secondary">Create Account</button>
+  </div>
+
+</ion-content>

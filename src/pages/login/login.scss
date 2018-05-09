@@ -1,0 +1,26 @@
+page-login {
+	.form {
+		position: absolute;
+		margin-top: 30% !important;
+	}
+  .error {
+		color: color($colors, danger);
+	}
+
+	.forgot {
+		color: color($colors, primary);
+		text-align: center;
+	}
+
+	.logo {		
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	.logo img {
+		height: 128px;
+	}
+
+	
+
+}

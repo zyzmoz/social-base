@@ -1,0 +1,31 @@
+<ion-content padding>
+  <div class="logo">
+    <img src="assets/imgs/logo.png" alt="" />  
+  </div>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [(ngModel)]="data.user" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [(ngModel)]="data.password" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <p class="error">{{data.message}}</p>
+  <br/>
+  <button [disabled]="!data.user || !data.password" ion-button (click)="signIn()" block color="secondary">Login</button>
+  <br/>
+  <p (click)="resetPassword()" class="forgot">Forgot your password? <strong>Click Here!</strong></p>
+  <br/>
+  <p class="divider"><span>OR</span></p>
+  <br/>
+  <button ion-button (click)="createAccount()"  block>Create Account</button>
+  <br/>
+
+</ion-content>
+<ion-footer text-center>
+  Built with <span class="error">&hearts;</span> by Daniel Cunha
+</ion-footer>
