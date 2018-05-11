@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "41868907638",
+    "firebase_url": "https://goal-coach-953d0.firebaseio.com",
+    "project_id": "goal-coach-953d0",
+    "storage_bucket": "goal-coach-953d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41868907638:android:5e12622e626ba3ef",
+        "android_client_info": {
+          "package_name": "com.socialbase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41868907638-rv2oth1gdqaoac57a9qelu7n2epb48ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.socialbase",
+            "certificate_hash": "7c50de90d806adf423a544d1a304d0b80919f7ab"
+          }
+        },
+        {
+          "client_id": "41868907638-dm5hs6eokduoavomv1037ejsn0fol5bq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApmuqUQ5-8a6kctH0hT-NimC7MqUnnAIU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41868907638-dm5hs6eokduoavomv1037ejsn0fol5bq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

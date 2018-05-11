@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Account } from '../../models/account';
 
-interface Account {
-  name: string,
-  username: string,
-  email: string,
-  photoURL: string
-}
 
 @Injectable()
 export class AccountProvider {  

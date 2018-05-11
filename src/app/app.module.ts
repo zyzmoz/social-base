@@ -9,9 +9,11 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { VerifyAccountPage } from '../pages/verify-account/verify-account'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Camera } from '@ionic-native/camera';
 
 //config
 import firebaseConfig from './firebaseConfig';
@@ -21,6 +23,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AccountProvider } from '../providers/account/account';
 import { AuthProvider } from '../providers/auth/auth';
+import { LoadingProvider } from '../providers/loading/loading';
+import { ImageProvider } from '../providers/image/image';
+
+import { CDVPhotoLibraryPipe } from '../util/cdvphotolibrary.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,9 @@ import { AuthProvider } from '../providers/auth/auth';
     HomePage,
     LoginPage,
     SignupPage,
-    TabsPage
+    VerifyAccountPage,
+    TabsPage,
+    CDVPhotoLibraryPipe
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -47,6 +55,7 @@ import { AuthProvider } from '../providers/auth/auth';
     HomePage,
     LoginPage,
     SignupPage,
+    VerifyAccountPage,
     TabsPage
   ],
   providers: [
@@ -54,7 +63,10 @@ import { AuthProvider } from '../providers/auth/auth';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AccountProvider,
-    AuthProvider
+    AuthProvider,
+    LoadingProvider,
+    ImageProvider,
+    Camera
   ]
 })
 export class AppModule {}
