@@ -57,11 +57,12 @@ export class AuthProvider {
           .catch(err => console.log(err));
 
         const user: Account = {
+          uid: uid,
           name: obj.name,
           username: obj.username,
           email: obj.email,
           phone: null,
-          photoURL: photoURL
+          photoURL: photoURL? photoURL: null
         };
         
         
@@ -77,23 +78,23 @@ export class AuthProvider {
     const self = this;
     if (this.platform.is('cordova')) {
       let signInCredential: any = firebase.auth.PhoneAuthProvider.credential(obj.verificationId, obj.confirmationCode);
-      firebase.auth().signInWithCredential(signInCredential).then((res) => {
+      firebase.auth().signInWithCredential(signInCredential).then(async(res) => {
         const { uid } = res;
-        const user: any = {
+        const photoURL: any = await this.imageProvider.uploadProfilePhoto(uid, obj.photoURL)
+          .catch(err => console.log(err));
+        const user: Account = {
+          uid: uid,
           name: obj.name,
           username: obj.username,
           email: null,
           phone: obj.phone,
-          photoURL: obj.photoURL ? obj.photoURL : null
+          photoURL: photoURL? photoURL: null
         };
         this.afs.collection('accounts').doc(uid).set(user)
           .then(() => {
             this.afa.auth.currentUser.sendEmailVerification();
           });
-        // .then((user) => {
-        // this.imageProvider.uploadProfilePhoto(userData, userData.image);
-
-        // });
+        
       });
     } else {
       console.log('function unavailable into browser');
