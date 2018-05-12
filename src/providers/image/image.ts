@@ -84,5 +84,27 @@ export class ImageProvider {
     });
   }
 
+  uploadPostPhoto(uid, imageData) {
+    return new Promise((resolve, reject) => {
+      let imgBlob = this.imgURItoBlob(imageData);
+      let metadata = {
+        'contentType': imgBlob.type
+      };
+
+      firebase.storage().ref().child('images/posts/' + uid + '/' + this.generateFilename()).put(imgBlob, metadata).then((snapshot) => {
+        // Delete previous profile photo on Storage if it exists.
+        console.log('Snapshot', snapshot);
+        // URL of the uploaded image!
+        let url = snapshot.metadata.downloadURLs[0];
+        console.log('Photo URL', url);
+        resolve(url);
+      }).catch((error) => {
+        console.log('Error.up', error);
+        reject(error);
+      });
+
+    });
+  }
+
 
 }

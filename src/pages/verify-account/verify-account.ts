@@ -26,22 +26,24 @@ export class VerifyAccountPage {
     private toast: ToastController
   ) {
     const { uid, email } = this.navParams.get('user');
-    
+
     this.user = { uid, email };
 
   }
 
   ionViewDidLoad() {
     var that = this;
-    that.checkVerified = setInterval(function() {
-      that.afa.auth.currentUser.reload();
-      if (that.afa.auth.currentUser.emailVerified) {
-        clearInterval(that.checkVerified);
-        that.emailVerified = true;
-        that.navCtrl.setRoot(TabsPage);
-        
-      }
-    }, 1000);
+    if (that.afa.auth.currentUser) {
+      that.checkVerified = setInterval(() => {
+        that.afa.auth.currentUser.reload();
+        if (that.afa.auth.currentUser.emailVerified) {
+          clearInterval(that.checkVerified);
+          that.emailVerified = true;
+          that.navCtrl.setRoot(TabsPage);
+
+        }
+      }, 1000);
+    }
   }
 
   sendEmailVerification() {
@@ -79,7 +81,7 @@ export class VerifyAccountPage {
                 .then((res) => {
                   //Update UserData
                   this.afa.auth.currentUser.sendEmailVerification();
-                  this.afs.collection('accounts').doc(this.user.uid).update({email: email});
+                  this.afs.collection('accounts').doc(this.user.uid).update({ email: email });
                   this.ionViewDidLoad();
                   this.loadingProvider.hide();
                   this.toast.create({
@@ -110,8 +112,8 @@ export class VerifyAccountPage {
     this.navCtrl.popToRoot();
   }
 
-  emailVerification (){
-    
+  emailVerification() {
+
   }
 
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { TimelineProvider } from '../../providers/timeline/timeline';
 import { AccountProvider } from '../../providers/account/account';
 import { Post } from '../../models/post';
+import moment from 'moment';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private timelineProvider: TimelineProvider,
-    private accountProvider : AccountProvider
+    private accountProvider : AccountProvider,
+    private modalCtrl : ModalController
 
   ) {
     this.accountProvider.getAccount().subscribe((data) => {
@@ -31,6 +33,7 @@ export class HomePage {
 
     this.timelineProvider.getAllPosts().subscribe((data) => {
       console.log(data);
+      this.timeline = [];
       data.map(a => {
         const data = a.payload.doc.data() ;
         const uid = a.payload.doc.id;
@@ -45,7 +48,28 @@ export class HomePage {
     this.timelineProvider.likePost(uid);
   }
 
+  dislike(uid){
+    this.timelineProvider.dislikePost(uid);
+  }
+
+  addPost () {
+    this.modalCtrl.create('AddPostPage').present();    
+  }
+
+
+  getDate(date){
+    
+    return moment(new Date(date.seconds * 1000)).fromNow();
+  }
   
+  likeState(likes: any){    
+    if(likes){
+      if (likes.indexOf(this.account.uid) !== -1)
+      return true;
+    }
+    return false;
+
+  }
 
 
 }

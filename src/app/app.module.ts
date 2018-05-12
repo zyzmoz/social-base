@@ -28,6 +28,7 @@ import { ImageProvider } from '../providers/image/image';
 
 import { CDVPhotoLibraryPipe } from '../util/cdvphotolibrary.pipe';
 import { TimelineProvider } from '../providers/timeline/timeline';
+import { LocationProvider } from '../providers/location/location';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TimelineProvider } from '../providers/timeline/timeline';
     LoadingProvider,
     ImageProvider,
     Camera,
-    TimelineProvider
+    TimelineProvider,
+    LocationProvider
   ]
 })
 export class AppModule {}

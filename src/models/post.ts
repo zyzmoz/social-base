@@ -6,5 +6,7 @@ export interface Post {
     user: string,
     userPhoto?: string,
     likes?: Array<any>,
-    comments?: Array<any> 
+    comments?: Array<any>,
+    location?: Object,
+    address?: string
 }

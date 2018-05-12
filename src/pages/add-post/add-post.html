@@ -1,18 +1,42 @@
-<!--
-  Generated template for the AddPostPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>add-post</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <button (click)="close()" ion-button icon-only menuToggle>
+      <ion-icon name="close"></ion-icon>
+    </button>
+
+    <ion-title text-center>
+      New Post
+    </ion-title>
+
+    <ion-buttons end>
+      <button (click)="post()" ion-button icon-right>
+        Post
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-textarea [(ngModel)]="text" placeholder="What's happening?"></ion-textarea>
+    </ion-item>
+    <ion-item class="addons">
+      <button (click)="chooseImage()" ion-button icon-only clear color="dark">
+        <ion-icon name="camera"></ion-icon>
+      </button>
 
+      <button [ngClass]="{'active': location}" ion-button icon-only clear color="dark" (click)="location = !location">
+        <ion-icon name="pin"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="image" class="image">
+    <img [src]="image" alt="img"/>
+  </div>
 </ion-content>
