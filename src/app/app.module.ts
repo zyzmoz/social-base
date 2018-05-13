@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+import { SearchPage } from '../pages/search/search';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -29,11 +29,12 @@ import { ImageProvider } from '../providers/image/image';
 import { CDVPhotoLibraryPipe } from '../util/cdvphotolibrary.pipe';
 import { TimelineProvider } from '../providers/timeline/timeline';
 import { LocationProvider } from '../providers/location/location';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    SearchPage,
     ContactPage,
     HomePage,
     LoginPage,
@@ -47,12 +48,13 @@ import { LocationProvider } from '../providers/location/location';
     AngularFirestoreModule,
     AngularFireAuthModule,
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp)    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    SearchPage,
     ContactPage,
     HomePage,
     LoginPage,

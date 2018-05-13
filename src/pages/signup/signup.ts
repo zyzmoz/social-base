@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -32,7 +32,8 @@ export class SignupPage {
     public navCtrl: NavController,
     public authProvider: AuthProvider,
     private alertCtrl : AlertController,
-    private camera: Camera
+    private camera: Camera,
+    private zone : NgZone
   ) {
   }
 
@@ -51,12 +52,11 @@ export class SignupPage {
     user.photoURL = this.image;
     if (this.data.email.trim() === '') {
       console.log('?');
-      const self = this;
       (<any>window).FirebasePlugin.verifyPhoneNumber(user.phone, 60, (credential) => {
         console.log(credential);
         // ask user to input verificationCode:
         const { verificationId } = credential;
-        let prompt = self.alertCtrl.create({
+        let prompt = this.alertCtrl.create({
           title: 'Enter the Confirmation code',
           inputs: [{ name: 'confirmationCode', placeholder: 'Confirmation Code' }],
           buttons: [

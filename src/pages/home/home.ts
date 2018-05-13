@@ -22,7 +22,7 @@ export class HomePage {
     private modalCtrl : ModalController
 
   ) {
-    this.accountProvider.getAccount().subscribe((data) => {
+    this.accountProvider.getAccount(null).subscribe((data) => {
       this.account = data;
       console.log(this.account);
       
@@ -42,34 +42,22 @@ export class HomePage {
       // this.timeline = data;
     });
     console.log(this.timeline);
-  }
-
-  like(uid){
-    this.timelineProvider.likePost(uid);
-  }
-
-  dislike(uid){
-    this.timelineProvider.dislikePost(uid);
-  }
+  } 
 
   addPost () {
     this.modalCtrl.create('AddPostPage').present();    
   }
+ 
 
-
-  getDate(date){
-    
-    return moment(new Date(date.seconds * 1000)).fromNow();
-  }
-  
-  likeState(likes: any){    
-    if(likes){
-      if (likes.indexOf(this.account.uid) !== -1)
-      return true;
-    }
-    return false;
+  //Current User Profile
+  openProfile(){
+    this.modalCtrl.create('ProfilePage', {userId: this.account.uid}).present();
 
   }
 
+  //Other User Profile
+  goToProfile(userId){
+    this.modalCtrl.create('ProfilePage', {userId: userId}).present();
+  }
 
 }

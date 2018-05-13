@@ -8,5 +8,7 @@ export interface Post {
     likes?: Array<any>,
     comments?: Array<any>,
     location?: Object,
-    address?: string
+    address?: string,
+    postOwner?: string,
+    postOwnerId?: string
 }

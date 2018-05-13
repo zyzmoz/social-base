@@ -1,6 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <div  class="avatar-navbar" left>
+      
+      <img *ngIf="account" [src]="account.photoURL? account.photoURL : 'assets/imgs/buddy.png'"/>
+    </div>
+    <ion-buttons class="avatar-button" left>
+      <button (click)="openProfile()" ion-button icon-only>
+        <i class="fa fa-person"></i>
+      </button>
+    </ion-buttons>
+
+
+    <ion-title text-center>Home</ion-title>
 
     <ion-buttons end>
       <button (click)="addPost()" ion-button icon-only>
@@ -10,46 +21,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf="timeline">
-    <ion-card *ngFor="let post of timeline">
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="assets/imgs/buddy.png">
-        </ion-avatar>
-        <h2>{{post.user}}</h2>
-        <p>{{post.address}}</p>
-        <p>{{getDate(post.createdAt)}}</p>
-      </ion-item>
-      <ion-card-content>
-        <p>
-          {{post.text}}
-        </p>
-        <div *ngIf="post.photoURL">
-          <img class="post-img" [src]="post.photoURL" />
-        </div>
-      </ion-card-content>
-      <ion-row no-padding>
-        <ion-col>
-          <button *ngIf="!likeState(post.likes)" (click)="like(post.uid)" ion-button clear small icon-only color="dark">
-            <i class='fa fa-heart'></i>
-          </button>
-          <button *ngIf="likeState(post.likes)" (click)="dislike(post.uid)" ion-button clear small icon-only color="danger">
-              <i class='fa fa-heart'></i>
-            </button>
-          <button (click)="comment()" ion-button clear small icon-start color="dark">
-            <i class='fa fa-comment'></i>
-          </button>
-        </ion-col>
-        <ion-col text-right>
-          <button (click)="share()" ion-button clear small icon-start color="dark">
-            <ion-icon name='share-alt'></ion-icon>
-            Share
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </div>
+<ion-content >
+  <timeline [timeline]="timeline"></timeline>
 
 
 </ion-content>

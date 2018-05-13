@@ -23,6 +23,8 @@ export class AddPostPage {
   image: any = null;
   location: boolean = false;
   text: string = '';
+  postOwner: string;
+  postOwnerId: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,8 +38,10 @@ export class AddPostPage {
   ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPostPage');
+  ionViewWillEnter() {
+    this.text = this.navParams.get('text');
+    this.postOwner = this.navParams.get('postOwner');
+    this.postOwnerId = this.navParams.get('postOwnerId');
   }
 
   close() {
@@ -103,6 +107,8 @@ export class AddPostPage {
       userPhoto: '',
       postBy: '',
       createdAt: new Date(),
+      postOwner: this.postOwner? this.postOwner: null,
+      postOwnerId: this.postOwnerId? this.postOwnerId: null
     }
     //Verify which data will be sent to the collection
     if (this.platform.is('cordova')) {

@@ -75,7 +75,7 @@ export class AuthProvider {
   }
 
   signUpWithPhoneNumber(obj) {
-    const self = this;
+    // const self = this;
     if (this.platform.is('cordova')) {
       let signInCredential: any = firebase.auth.PhoneAuthProvider.credential(obj.verificationId, obj.confirmationCode);
       firebase.auth().signInWithCredential(signInCredential).then(async(res) => {

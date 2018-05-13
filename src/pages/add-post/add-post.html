@@ -23,10 +23,10 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-textarea [(ngModel)]="text" placeholder="What's happening?"></ion-textarea>
+      <ion-textarea [disabled]="postOwner" [(ngModel)]="text" placeholder="What's happening?"></ion-textarea>
     </ion-item>
-    <ion-item class="addons">
-      <button (click)="chooseImage()" ion-button icon-only clear color="dark">
+    <ion-item  class="addons">
+      <button *ngIf="!postOwner" (click)="chooseImage()" ion-button icon-only clear color="dark">
         <ion-icon name="camera"></ion-icon>
       </button>
 

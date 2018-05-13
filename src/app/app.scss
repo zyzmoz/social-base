@@ -77,3 +77,31 @@
   @extend .fa-icons-general;
   content: "\f00e";
 }
+
+.comment {
+  color: color($colors, primary);
+}
+
+.avatar-navbar {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  margin-left: 5px;
+  top: 5px;
+  left: 0;
+  border: 1px solid color($colors, primary);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar-button .bar-button{
+  width: 48px !important;
+  color: transparent;
+}
+.card {
+  box-shadow:0 0 0 #d6d6d6 !important;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+ion-avatar img {
+  border: 1px solid color($colors, primary);
+}
