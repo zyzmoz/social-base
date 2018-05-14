@@ -10,9 +10,12 @@
         <ion-icon name="add"></ion-icon>
         Follow
       </button>
-      <button  (click)="unfollow(user.uid)" *ngIf="followingStatus(user.uid) && !chat" color="danger" ion-button icon-left item-end>
+      <button (click)="unfollow(user.uid)" *ngIf="followingStatus(user.uid) && !chat" color="danger" ion-button icon-left item-end>
         <ion-icon name="remove"></ion-icon>
         Unfollow
+      </button>
+      <button (click)="startChat(user)" *ngIf="chat" ion-button icon-only clear color="dark" item-end>
+        <ion-icon name="chatbubbles"></ion-icon>
       </button>
     </ion-item>
   </ion-card>

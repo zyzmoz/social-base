@@ -14,7 +14,17 @@
 </ion-header>
 
 
-<ion-content padding>
-  Not working yet!
+<ion-content>
+  <ion-card *ngFor="let chat of chats">
+    <ion-item (click)="goToChat(chat.uid)">
+      <ion-avatar item-start>
+        <img [src]="chat.recipientPhoto">
+      </ion-avatar>
+      <h2>{{chat.recipient}}</h2> 
+      <button (click)="deleteChat(chat.uid)" ion-button icon-only color="red" item-end>
+        <ion-icon name="trash"></ion-icon>
+      </button>     
+    </ion-item>
+  </ion-card>
 
 </ion-content>

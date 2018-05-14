@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-
-import { SearchPage } from '../search/search';
-import { HotTimelinePage } from '../../pages/hot-timeline/hot-timeline';
 import { HomePage } from '../home/home';
+import { ChatProvider } from '../../providers/chat/chat';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,7 +13,12 @@ export class TabsPage {
   tab4Root = 'NotificationsPage';
   tab5Root = 'MessagesPage';
 
-  constructor() {
-
+  unreadMessages: any[] = [];
+  constructor(
+    private chatProvider : ChatProvider
+  ) {
+    this.chatProvider.isUnread().subscribe( data =>{
+      this.unreadMessages = data;
+    })
   }
 }

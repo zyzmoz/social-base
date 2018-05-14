@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 import { TimelineProvider } from '../../providers/timeline/timeline';
 import { AccountProvider } from '../../providers/account/account';
+import { ChatProvider } from '../../providers/chat/chat';
 import { Post } from '../../models/post';
 import moment from 'moment';
 
@@ -23,7 +24,9 @@ export class UserListComponent {
     public navCtrl: NavController,
     private timelineProvider: TimelineProvider,
     private accountProvider: AccountProvider,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private viewCtrl : ViewController,
+    private chatProvider : ChatProvider
 
   ) {
     this.accountProvider.getAccount(null).subscribe((data) => {
@@ -55,5 +58,9 @@ export class UserListComponent {
     this.modalCtrl.create('ProfilePage', {userId: userId}).present();
   }
 
+  startChat(user){
+    const { uid, name, photoURL } = user;
+    this.chatProvider.openChat(this.viewCtrl, { uid, name, photoURL });
+  }
 
 }
