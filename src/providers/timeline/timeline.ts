@@ -45,7 +45,7 @@ export class TimelineProvider {
 
   }
 
-  sharePost(obj: Post) {
+  sharePost(obj: any) {
     return new Promise((resolve) => {
       const userId = this.afa.auth.currentUser.uid;
       obj.postBy = userId;
@@ -63,9 +63,11 @@ export class TimelineProvider {
             obj.photoURL = photoURL;
           }
 
-          this.afs.collection('posts').add(obj)
+          await this.afs.collection('posts').add(obj)
             .then(res => resolve(res))
             .catch(err => console.log(err));
+
+          this.createNotification(obj.uid, 'shared');
         })
     });
 
@@ -101,13 +103,14 @@ export class TimelineProvider {
         .subscribe((post: any) => {
           let likes = post.likes;
           likes = { [userId]: true, ...likes };
-          
+
           resolve(likes);
         })
     });
 
-    await this.afs.doc('posts/' + postId).update({ "likes": likes });    
-       
+    await this.afs.doc('posts/' + postId).update({ "likes": likes });
+    this.createNotification(postId, 'liked');
+
   }
 
   async dislikePost(postId) {
@@ -118,7 +121,7 @@ export class TimelineProvider {
         .subscribe((post: any) => {
           let likes = post.likes;
           delete likes[userId];
-          
+
           resolve(likes);
         })
     });
@@ -191,11 +194,46 @@ export class TimelineProvider {
         })
     });
 
-    this.afs.doc('posts/' + postId).update({ comments: comments });
+    await this.afs.doc('posts/' + postId).update({ comments: comments });
+    this.createNotification(postId, 'commented');
+  }
+
+  //Notifications
+  async createNotification(postId, event) {
+    const currentUser = this.afa.auth.currentUser.uid;
+    let post : any = await new Promise((resolve) => {
+      this.afs.doc('posts/' + postId).valueChanges()
+        .subscribe(post => resolve(post));
+    });
+
+    let user : any = await new Promise((resolve) => {
+      this.afs.doc('accounts/' + currentUser).valueChanges()
+        .subscribe(user => resolve(user));
+    });
+
+    const notification : Notification = {
+      event: event,
+      userId: currentUser,
+      user: user.name,
+      userPhoto: user.photoURL,
+      owner: post.user,
+      postId: postId,
+      createdAt: new Date(),
+      text: post.text
+    }
+
+    await this.afs.collection('notifications').add(notification)
+      .catch(err => console.log(err));
+
+  }
+
+  getNotifications() {
+    return this.afs.collection('notifications', ref => ref.orderBy('createdAt', 'desc')).valueChanges();
   }
 
 
 
+  //Timelines
   getAllPosts() {
     return this.afs.collection('posts', ref => ref.orderBy('createdAt', 'desc')).snapshotChanges();
   }
@@ -205,11 +243,11 @@ export class TimelineProvider {
   }
 
   getLikedPosts(userId) {
-    return this.afs.collection('posts', ref => ref.where('likes.' + userId, '==' , true)).snapshotChanges();
+    return this.afs.collection('posts', ref => ref.where('likes.' + userId, '==', true)).snapshotChanges();
   }
 
   getBookmarkedPosts(userId) {
-    return this.afs.collection('posts', ref => ref.where('bookmark.' + userId, '==' , true)).snapshotChanges();
+    return this.afs.collection('posts', ref => ref.where('bookmark.' + userId, '==', true)).snapshotChanges();
 
   }
 

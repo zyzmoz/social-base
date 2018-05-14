@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>notifications</ion-title>
+    <ion-title>Notifications</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item (click)="openPost(item.postId)"
+      class="notification" *ngFor="let item  of  notifications" text-wrap>
+      <ion-avatar item-left>
+        <img [src]="item.userPhoto? item.userPhoto : 'assets/imgs/buddy.png'" />
+      </ion-avatar>
+      <b>{{item.user}} </b>
+      {{item.event}} a post from
+      <b> {{item.owner}}</b>
+      <br/>
+      <ion-note>
+        {{item.text}}
+      </ion-note>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>

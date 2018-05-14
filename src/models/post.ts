@@ -1,4 +1,4 @@
-export interface Post {
+export interface Post {    
     createdAt: Date,
     text?: string,
     photoURL?: string,
