@@ -1,0 +1,19 @@
+<div *ngIf="users">
+  <ion-card *ngFor="let user of users">
+    <ion-item>
+      <ion-avatar (click)="goToProfile(user.uid)" item-start>
+        <img [src]="user.photoURL">
+      </ion-avatar>
+      <h2>{{user.name}}</h2>
+      <p>{{user.username}}</p>
+      <button (click)="follow(user.uid)" *ngIf="!followingStatus(user.uid)" ion-button icon-left item-end>
+        <ion-icon name="add"></ion-icon>
+        Follow
+      </button>
+      <button (click)="unfollow(user.uid)" *ngIf="followingStatus(user.uid)" color="danger" ion-button icon-left item-end>
+        <ion-icon name="remove"></ion-icon>
+        Unfollow
+      </button>
+    </ion-item>
+  </ion-card>
+</div>

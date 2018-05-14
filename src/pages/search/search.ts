@@ -61,21 +61,7 @@ export class SearchPage {
     console.log(this.timeline);
   }
 
-  followingStatus(userId){
-    if (this.account.following){
-      if (this.account.following[userId])
-        return true;
-    }
-    return false;
-  }
-
-  follow(userId){
-    this.accountProvider.follow(userId);
-  }
-
-  unfollow(userId){
-    this.accountProvider.unfollow(userId);
-  }
+  
 
   
   search(ev: any) {

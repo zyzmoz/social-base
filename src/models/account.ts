@@ -7,6 +7,7 @@ export interface Account {
     phone: string,
     photoURL: string,
     following?: Array<any>,
+    followers?: Array<any>,
     friends?:  Array<any>,
     bookmark?: Array<any> 
 

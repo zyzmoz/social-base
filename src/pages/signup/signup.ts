@@ -27,6 +27,7 @@ export class SignupPage {
   step: number = 1;
   countries: any = countries;
   countryCode: any = '+55';
+  private showAlert = false;
 
   constructor(
     public navCtrl: NavController,
@@ -48,6 +49,7 @@ export class SignupPage {
 
   createAccount() {
     const user: any = this.data;
+    this.showAlert = true;
     user.phone = this.countryCode + user.phone;
     user.photoURL = this.image;
     if (this.data.email.trim() === '') {
@@ -79,7 +81,7 @@ export class SignupPage {
             }
           ]
         });
-        prompt.present();
+        prompt.present().then(() => this.showAlert = false);
       }, function (error) {
         console.error(error);
       });

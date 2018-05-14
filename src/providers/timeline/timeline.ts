@@ -3,6 +3,7 @@ import { AlertController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Post } from '../../models/post';
+import { Notification } from '../../models/notification';
 import { ImageProvider } from '../../providers/image/image';
 
 @Injectable()
@@ -105,7 +106,8 @@ export class TimelineProvider {
         })
     });
 
-    this.afs.doc('posts/' + postId).update({ "likes": likes });
+    await this.afs.doc('posts/' + postId).update({ "likes": likes });    
+       
   }
 
   async dislikePost(postId) {
@@ -116,9 +118,7 @@ export class TimelineProvider {
         .subscribe((post: any) => {
           let likes = post.likes;
           delete likes[userId];
-          // const index = likes.map(like => like.likedBy).indexOf(userId);
-          // console.log(index);
-          // likes.splice(index, 1);
+          
           resolve(likes);
         })
     });
@@ -210,6 +210,11 @@ export class TimelineProvider {
 
   getBookmarkedPosts(userId) {
     return this.afs.collection('posts', ref => ref.where('bookmark.' + userId, '==' , true)).snapshotChanges();
+
+  }
+
+  getFollowingPosts() {
+    return this.afs.collection('posts', ref => ref.orderBy('createdAt', 'desc')).snapshotChanges();
 
   }
 

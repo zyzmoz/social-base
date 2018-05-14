@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { SearchPage } from '../pages/search/search';
-import { ContactPage } from '../pages/contact/contact';
+// import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
@@ -30,12 +29,12 @@ import { CDVPhotoLibraryPipe } from '../util/cdvphotolibrary.pipe';
 import { TimelineProvider } from '../providers/timeline/timeline';
 import { LocationProvider } from '../providers/location/location';
 import { ComponentsModule } from '../components/components.module';
+import { ChatProvider } from '../providers/chat/chat';
 
 @NgModule({
   declarations: [
     MyApp,
-    SearchPage,
-    ContactPage,
+    // SearchPage,
     HomePage,
     LoginPage,
     SignupPage,
@@ -54,8 +53,7 @@ import { ComponentsModule } from '../components/components.module';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    SearchPage,
-    ContactPage,
+    // SearchPage,
     HomePage,
     LoginPage,
     SignupPage,
@@ -72,7 +70,8 @@ import { ComponentsModule } from '../components/components.module';
     ImageProvider,
     Camera,
     TimelineProvider,
-    LocationProvider
+    LocationProvider,
+    ChatProvider
   ]
 })
 export class AppModule {}
