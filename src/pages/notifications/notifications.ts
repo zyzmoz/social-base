@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import moment from 'moment';
 import { TimelineProvider } from '../../providers/timeline/timeline';
 import { AccountProvider } from '../../providers/account/account';
@@ -18,7 +18,8 @@ export class NotificationsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private accountProvider: AccountProvider,
-    private timelineProvider: TimelineProvider
+    private timelineProvider: TimelineProvider,
+    private modalCtrl : ModalController
 
 
   ) {
@@ -30,14 +31,28 @@ export class NotificationsPage {
 
   ionViewWillEnter() {
     this.timelineProvider.getNotifications()
-      .subscribe(data => {
-        this.notifications = data;
+      .subscribe((data: any) => {
+        this.notifications = [];
 
+        if (this.account.following) {
+          this.notifications = data.filter(item => {
+            return this.account.following[item.userId] ? item : null
+          });
+        }
       });
   }
 
-  openPost(postId){
+  getDate(date) {
+
+    return moment(new Date(date.seconds * 1000)).fromNow();
+  }
+
+
+  openPost(postId) {
+    this.modalCtrl.create('ViewPostPage', {postId: postId}).present();
     console.log('Opening:', postId);
   }
+
+  
 
 }

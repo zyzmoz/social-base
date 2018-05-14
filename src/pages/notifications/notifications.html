@@ -20,6 +20,7 @@
       <ion-avatar item-left>
         <img [src]="item.userPhoto? item.userPhoto : 'assets/imgs/buddy.png'" />
       </ion-avatar>
+      <p item-end>{{getDate(item.createdAt)}}</p>
       <b>{{item.user}} </b>
       {{item.event}} a post from
       <b> {{item.owner}}</b>
