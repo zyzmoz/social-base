@@ -17,13 +17,11 @@
 <ion-content>
   <ion-card *ngFor="let chat of chats">
     <ion-item (click)="goToChat(chat.uid)">
-      <ion-avatar item-start>
+      <ion-avatar [ngClass]="{'unread': chat.unread}" item-start>
         <img [src]="chat.recipientPhoto">
-      </ion-avatar>
-      <h2>{{chat.recipient}}</h2> 
-      <button (click)="deleteChat(chat.uid)" ion-button icon-only color="red" clear item-end>
-        <ion-icon name="trash"></ion-icon>
-      </button>     
+      </ion-avatar>      
+      <h2>{{chat.recipient}}</h2>   
+      <b *ngIf="chat.unread" item-end>Unread</b>       
     </ion-item>
   </ion-card>
 

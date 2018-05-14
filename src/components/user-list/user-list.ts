@@ -58,9 +58,11 @@ export class UserListComponent {
     this.modalCtrl.create('ProfilePage', {userId: userId}).present();
   }
 
-  startChat(user){
+  async startChat(user){
     const { uid, name, photoURL } = user;
-    this.chatProvider.openChat(this.viewCtrl, { uid, name, photoURL });
+    console.log('Add.Chat', { uid, name, photoURL });
+    
+    await this.chatProvider.openChat(this.viewCtrl, { uid, name, photoURL });
   }
 
 }

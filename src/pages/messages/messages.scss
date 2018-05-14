@@ -1,3 +1,6 @@
 page-messages {
+    ion-card .unread img   {
+        border: 2px solid color($colors, danger) !important;
+    }
 
 }

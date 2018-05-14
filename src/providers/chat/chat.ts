@@ -17,6 +17,8 @@ export class ChatProvider {
   }
 
   async openChat(viewCtrl: ViewController, recipient) {
+    console.log('Recipient', recipient);
+    
     const currentUser = this.afa.auth.currentUser.uid;
     this.loadingProvider.show();
     let chat: any = await new Promise((resolve) => {

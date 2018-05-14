@@ -20,7 +20,7 @@ export class MessagesPage {
   ) {
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.chatProvider.getChats().subscribe(data => {
       this.chats = [];
       data.map(a => {
