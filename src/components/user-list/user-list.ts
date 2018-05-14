@@ -15,6 +15,7 @@ import moment from 'moment';
 export class UserListComponent {
 
   @Input() users: any[];
+  @Input() chat: boolean = false;  
 
   
   account: any;
@@ -30,6 +31,7 @@ export class UserListComponent {
       console.log(this.account);
 
     });
+    
   }
 
   followingStatus(userId){
