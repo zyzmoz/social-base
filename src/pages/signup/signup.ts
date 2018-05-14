@@ -81,7 +81,8 @@ export class SignupPage {
             }
           ]
         });
-        prompt.present().then(() => this.showAlert = false);
+        if(this.showAlert)
+          prompt.present().then(() => this.showAlert = false);
       }, function (error) {
         console.error(error);
       });
