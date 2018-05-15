@@ -21,6 +21,7 @@
   <div [ngSwitch]="view">
     <div *ngSwitchCase="'posts'">
       <timeline [timeline]="timeline"></timeline>
+      
     </div>
     <div *ngSwitchCase="'people'">
       <user-list [users]="users"></user-list>

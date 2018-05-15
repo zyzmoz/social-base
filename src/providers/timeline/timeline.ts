@@ -9,6 +9,7 @@ import { ImageProvider } from '../../providers/image/image';
 @Injectable()
 export class TimelineProvider {
 
+  limit : number = 10;
   constructor(
     private afs: AngularFirestore,
     private afa: AngularFireAuth,
@@ -235,7 +236,7 @@ export class TimelineProvider {
 
   //Timelines
   getAllPosts() {
-    return this.afs.collection('posts', ref => ref.orderBy('createdAt', 'desc')).snapshotChanges();
+    return this.afs.collection('posts', ref => ref.orderBy('createdAt', 'desc')/*.limit(this.limit)*/).snapshotChanges();
   }
 
   getUserPosts(userId) {

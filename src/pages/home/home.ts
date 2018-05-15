@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, InfiniteScroll } from 'ionic-angular';
 import { TimelineProvider } from '../../providers/timeline/timeline';
 import { AccountProvider } from '../../providers/account/account';
 import { Post } from '../../models/post';
@@ -11,7 +11,7 @@ import moment from 'moment';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  limit: number = 10;
   timeline:any[] = []; //Array<Post>;
   account: any;
 
@@ -19,7 +19,7 @@ export class HomePage {
     public navCtrl: NavController,
     private timelineProvider: TimelineProvider,
     private accountProvider : AccountProvider,
-    private modalCtrl : ModalController
+    private modalCtrl : ModalController,
 
   ) {
     this.accountProvider.getAccount(null).subscribe((data) => {
@@ -29,8 +29,12 @@ export class HomePage {
     });
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter() {    
+    console.log(this.timeline);
+    this.getPosts();
+  } 
 
+  getPosts(){
     this.timelineProvider.getAllPosts().subscribe((data) => {
       console.log(data);
       this.timeline = [];
@@ -41,8 +45,7 @@ export class HomePage {
       });
       // this.timeline = data;
     });
-    console.log(this.timeline);
-  } 
+  }
 
   addPost () {
     this.modalCtrl.create('AddPostPage').present();    
@@ -60,4 +63,15 @@ export class HomePage {
     this.modalCtrl.create('ProfilePage', {userId: userId}).present();
   }
 
+
+  //infinite scroll
+  doInfinite(infiniteScroll : InfiniteScroll) {
+    console.log('Begin async operation');
+    this.timelineProvider.limit += 10;
+    setTimeout(async () => {
+      await this.getPosts();
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
 }

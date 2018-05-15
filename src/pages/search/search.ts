@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, InfiniteScroll } from 'ionic-angular';
 import { TimelineProvider } from '../../providers/timeline/timeline';
 import { AccountProvider } from '../../providers/account/account';
 import { Post } from '../../models/post';
@@ -23,6 +23,7 @@ export class SearchPage {
   userList: any[] = [];
 
   account: any;
+
 
   constructor(
     public navCtrl: NavController,
@@ -61,9 +62,9 @@ export class SearchPage {
     console.log(this.timeline);
   }
 
-  
 
-  
+
+
   search(ev: any) {
     this.searchStr = ev.target.value;
 
@@ -84,7 +85,7 @@ export class SearchPage {
 
         this.users = this.userList.filter((item) => {
           return (item.name.toLowerCase().indexOf(this.searchStr.toLowerCase()) > -1 ||
-          item.username.toLowerCase().indexOf(this.searchStr.toLowerCase()) > -1 );
+            item.username.toLowerCase().indexOf(this.searchStr.toLowerCase()) > -1);
         })
       } else {
         this.users = this.userList.filter((item) => {
@@ -96,9 +97,11 @@ export class SearchPage {
   }
 
   //Other User Profile
-  goToProfile(userId){
-    this.modalCtrl.create('ProfilePage', {userId: userId}).present();
+  goToProfile(userId) {
+    this.modalCtrl.create('ProfilePage', { userId: userId }).present();
   }
+
+  
 
 
 }
