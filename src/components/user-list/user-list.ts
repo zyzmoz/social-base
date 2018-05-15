@@ -62,7 +62,7 @@ export class UserListComponent {
     const { uid, name, photoURL } = user;
     console.log('Add.Chat', { uid, name, photoURL });
     
-    await this.chatProvider.openChat(this.viewCtrl, { uid, name, photoURL });
+    await this.chatProvider.openChat(this.viewCtrl, { uid, name, photoURL }, this.account);
   }
 
 }

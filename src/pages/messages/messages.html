@@ -17,11 +17,12 @@
 <ion-content>
   <ion-card *ngFor="let chat of chats">
     <ion-item (click)="goToChat(chat.uid)">
-      <ion-avatar [ngClass]="{'unread': chat.unread}" item-start>
-        <img [src]="chat.recipientPhoto">
+      <ion-avatar [ngClass]="{'unread': unread(chat)}" item-start>
+        <img *ngIf="chat.createdBy == account.uid" [src]="chat.recipientPhoto? chat.recipientPhoto : 'assets/imgs/buddy.png'"/>
+        <img *ngIf="chat.createdBy !== account.uid" [src]="chat.senderPhoto? chat.senderPhoto : 'assets/imgs/buddy.png'"/>
       </ion-avatar>      
-      <h2>{{chat.recipient}}</h2>   
-      <b *ngIf="chat.unread" item-end>Unread</b>       
+      <h2>{{chat.createdBy == account.uid? chat.recipient: chat.sender}}</h2>   
+      <b *ngIf="unread(chat)" item-end>Unread</b>       
     </ion-item>
   </ion-card>
 
